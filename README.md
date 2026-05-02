@@ -17,8 +17,8 @@ Senha: admin
 
 ## Screenshots
 
-![Página inicial](.github/home.png)
 ![Login](.github/login.png)
+![Página inicial](.github/home.png)
 
 ---
 

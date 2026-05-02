@@ -30,7 +30,7 @@ export function useContactForm() {
     try {
       const formData = new FormData()
       formData.append('name', form.value.name)
-      formData.append('contact', form.value.contact)
+      formData.append('contact', form.value.contact.replace(/^\+55\s?/, ''))
       formData.append('email', form.value.email)
       if (form.value.picture instanceof File) {
         formData.append('picture', form.value.picture)

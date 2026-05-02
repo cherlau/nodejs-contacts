@@ -8,7 +8,7 @@ const routes = [
   { path: '/', component: ContactsView },
   { path: '/login', component: LoginView },
   { path: '/contacts/new', component: ContactFormView, meta: { requiresAuth: true } },
-  { path: '/contacts/:id', component: ContactDetailView },
+  { path: '/contacts/:id', component: ContactDetailView, meta: { requiresAuth: true } },
   { path: '/contacts/:id/edit', component: ContactFormView, meta: { requiresAuth: true } },
 ]
 
@@ -19,8 +19,11 @@ const router = createRouter({
 
 router.beforeEach((to, _from, next) => {
   const token = localStorage.getItem('token')
+  const isGuest = sessionStorage.getItem('guest') === 'true'
 
-  if (to.meta.requiresAuth && !token) {
+  if (!token && !isGuest && to.path === '/') {
+    next('/login')
+  } else if (to.meta.requiresAuth && !token) {
     next('/login')
   } else if (token && to.path === '/login') {
     next('/')

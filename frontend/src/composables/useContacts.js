@@ -11,7 +11,8 @@ export function useContacts() {
     loading.value = true
     error.value = ''
     try {
-      contacts.value = await contactsService.getAll()
+      const result = await contactsService.getAll()
+      contacts.value = Array.isArray(result) ? result : []
     } catch (err) {
       error.value = extractErrorMessage(err)
     } finally {

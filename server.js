@@ -24,7 +24,7 @@ app.get('/{*path}', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 54846;
 
 if (require.main === module) {
   app.listen(PORT);

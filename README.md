@@ -1,139 +1,147 @@
 # NodeJS Contacts
 
-Web application to manage contacts, built with Node.js and Vue.js.
+Aplicação web para gestão de contatos, desenvolvida com Node.js e Vue.js.
 
-**Live:** https://cherlaufilho-nodejs.recruitment.alfasoft.pt
-
-## Login site
-
-```
-Username: admin
-Password: admin
-```
-
+**Aplicação em produção:** https://cherlaufilho-nodejs.recruitment.alfasoft.pt
 
 ---
 
-## Tech Stack
+## Acesso ao site
+
+```
+Utilizador: admin
+Senha: admin
+```
+
+---
+
+## Screenshots
+
+![Página inicial](.github/home.png)
+![Login](.github/login.png)
+
+---
+
+## Tecnologias utilizadas
 
 **Backend**
 - Node.js + Express 5
-- mysql2 (raw SQL, no ORM)
-- Multer (image upload)
-- JWT + bcryptjs (authentication)
-- Jest + Supertest (tests)
+- mysql2 (SQL puro, sem ORM)
+- Multer (upload de imagens)
+- JWT + bcryptjs (autenticação)
+- Jest + Supertest (testes)
 
 **Frontend**
 - Vue 3 (Composition API, `<script setup>`)
 - Vue Router (history mode)
-- Pinia (state management)
+- Pinia (gestão de estado)
 - Axios
 - Vite
 
-**Database:** MariaDB (remote)
+**Base de dados:** MariaDB (remota)
 
 ---
 
-## Features
+## Funcionalidades
 
-- List all contacts on the landing page, displayed as cards with photo and details
-- Contact detail page
-- Add new contact (authenticated)
-- Edit existing contact using the same form (authenticated)
-- Delete contact with confirmation modal (authenticated)
-- JWT authentication — public routes for viewing, protected routes for mutations
-- Form validation on both frontend and backend
-- Unique constraint on contact number and email
+- Listagem de todos os contatos na página inicial, exibidos como cards com foto e dados
+- Página de detalhe do contato
+- Adicionar novo contato (requer autenticação)
+- Editar contato existente usando o mesmo formulário (requer autenticação)
+- Eliminar contato com modal de confirmação (requer autenticação)
+- Autenticação JWT — rotas públicas para visualização, protegidas para alterações
+- Validação de formulário no frontend e no backend
+- Contato e email únicos — não é possível duplicar
 
 ---
 
-## Project Structure
+## Estrutura do projeto
 
 ```
 nodejs-contacts/
 ├── config/
-│   └── database.js          # mysql2 connection pool
+│   └── database.js           # pool de ligação mysql2
 ├── controllers/
-│   ├── authController.js    # login, JWT generation
-│   └── contactsController.js# CRUD handlers + validation
+│   ├── authController.js     # login, geração do JWT
+│   └── contactsController.js # handlers CRUD + validações
 ├── middleware/
-│   ├── auth.js              # JWT verification
-│   └── upload.js            # Multer config
+│   ├── auth.js               # verificação do JWT
+│   └── upload.js             # configuração do Multer
 ├── routes/
-│   ├── auth.js              # POST /api/auth/login
-│   └── contacts.js          # /api/contacts CRUD
+│   ├── auth.js               # POST /api/auth/login
+│   └── contacts.js           # CRUD /api/contacts
 ├── tests/
-│   └── contacts.test.js     # Jest + Supertest
+│   └── contacts.test.js      # Jest + Supertest
 ├── frontend/
 │   └── src/
-│       ├── api/             # Axios layer
-│       ├── stores/          # Pinia stores
-│       ├── services/        # Business logic
-│       ├── composables/     # Reusable Vue logic
-│       ├── components/      # UI components
-│       └── views/           # Page components
-├── dist/                    # Frontend build (served by Express)
-├── uploads/                 # Contact images
+│       ├── api/              # camada Axios
+│       ├── stores/           # stores Pinia
+│       ├── services/         # lógica de negócio
+│       ├── composables/      # lógica Vue reutilizável
+│       ├── components/       # componentes UI
+│       └── views/            # páginas
+├── dist/                     # build do frontend (servido pelo Express)
+├── uploads/                  # imagens dos contatos
 └── server.js
 ```
 
 ---
 
-## API Endpoints
+## Endpoints da API
 
-| Method | Route | Auth | Description |
-|--------|-------|------|-------------|
-| POST | /api/auth/login | No | Login, returns JWT |
-| GET | /api/contacts | No | List all contacts |
-| GET | /api/contacts/:id | No | Get contact details |
-| POST | /api/contacts | Yes | Create contact |
-| PUT | /api/contacts/:id | Yes | Update contact |
-| DELETE | /api/contacts/:id | Yes | Delete contact |
+| Método | Rota | Auth | Descrição |
+|--------|------|------|-----------|
+| POST | /api/auth/login | Não | Login, retorna JWT |
+| GET | /api/contacts | Não | Listar todos os contatos |
+| GET | /api/contacts/:id | Não | Detalhe do contato |
+| POST | /api/contacts | Sim | Criar contato |
+| PUT | /api/contacts/:id | Sim | Editar contato |
+| DELETE | /api/contacts/:id | Sim | Eliminar contato |
 
-### Validation rules
-- `name`: required, length > 5
-- `contact`: required, exactly 9 digits
-- `email`: required, valid format
-- `picture`: required on POST (multipart/form-data)
-- `contact` and `email` must be unique
+### Regras de validação
+- `name`: obrigatório, mais de 5 caracteres
+- `contact`: obrigatório, exatamente 9 dígitos
+- `email`: obrigatório, formato válido
+- `picture`: obrigatório no POST (multipart/form-data)
+- `contact` e `email` devem ser únicos
 
 ---
 
-## Running Locally
+## Executar localmente
 
-### Prerequisites
+### Pré-requisitos
 - Node.js 18+
-- Access to the remote MariaDB (or a local MySQL instance)
+- Acesso à base de dados MariaDB remota (ou instância MySQL local)
 
-### Setup
+### Instalação
 
 ```bash
-# Install backend dependencies
+# Instalar dependências do backend
 npm install
 
-# Create .env at the project root
+# Criar o ficheiro .env na raiz do projeto
 cp .env.example .env
-# Fill in DB credentials and JWT_SECRET
+# Preencher as credenciais da BD e o JWT_SECRET
 
-# Install and build the frontend
+# Instalar e compilar o frontend
 cd frontend
 npm install
 npm run build
 cd ..
 
-# Start the server
+# Iniciar o servidor
 npm start
 ```
 
-The app will be available at `http://localhost:3000`.
+A aplicação fica disponível em `http://localhost:3000`.
 
-For frontend development with hot reload:
+Para desenvolvimento do frontend com hot reload:
 ```bash
 cd frontend
 npm run dev
 ```
 
-### Environment Variables
+### Variáveis de ambiente
 
 ```
 DB_HOST=
@@ -147,15 +155,15 @@ PORT=3000
 
 ---
 
-## Running Tests
+## Testes
 
-Tests run against the real database. Make sure the `.env` is configured before running.
+Os testes correm contra a base de dados real. Certifique-se que o ficheiro `.env` está configurado antes de executar.
 
 ```bash
 npm test
 ```
 
-Test coverage includes:
-- `POST /api/contacts` — returns 401 without token
-- `POST /api/contacts` — returns 400 with invalid name, contact, email, missing image
-- `PUT /api/contacts/:id` — returns 400 with invalid fields, 404 for unknown id
+Cobertura de testes:
+- `POST /api/contacts` — retorna 401 sem token
+- `POST /api/contacts` — retorna 400 com nome, contato ou email inválidos, ou sem imagem
+- `PUT /api/contacts/:id` — retorna 400 com dados inválidos, 404 para id inexistente

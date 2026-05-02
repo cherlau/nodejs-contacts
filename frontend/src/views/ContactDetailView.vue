@@ -2,6 +2,9 @@
 import { useContactDetail } from '@/composables/useContactDetail'
 import { RouterLink } from 'vue-router'
 import { env } from '@/config/env'
+import { useAuthStore } from '@/stores/useAuthStore'
+
+const authStore = useAuthStore()
 
 const { contact, loading, error } = useContactDetail()
 
@@ -34,7 +37,7 @@ function getInitials(name) {
       <div class="detail-eyebrow">
         <span class="detail-eyebrow__label">Contato</span>
         <span class="detail-eyebrow__rule"></span>
-        <RouterLink :to="`/contacts/${contact.id}/edit`" class="btn btn--primary btn--sm">
+        <RouterLink v-if="authStore.isAuthenticated" :to="`/contacts/${contact.id}/edit`" class="btn btn--primary btn--sm">
           Editar
         </RouterLink>
       </div>

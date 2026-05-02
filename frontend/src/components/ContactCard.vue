@@ -54,15 +54,15 @@ function getInitials(name) {
       </div>
     </div>
 
-    <!-- Footer actions (authenticated only) -->
-    <div v-if="authStore.isAuthenticated" class="contact-card__footer">
+    <!-- Footer actions -->
+    <div class="contact-card__footer">
       <RouterLink :to="`/contacts/${contact.id}`" class="btn btn--ghost btn--sm contact-card__btn-ver">
         Ver
       </RouterLink>
-      <RouterLink :to="`/contacts/${contact.id}/edit`" class="btn btn--sm contact-card__btn-edit">
+      <RouterLink v-if="authStore.isAuthenticated" :to="`/contacts/${contact.id}/edit`" class="btn btn--sm contact-card__btn-edit">
         Editar
       </RouterLink>
-      <button class="btn btn--danger btn--sm" @click="emit('delete', contact.id)" title="Excluir">
+      <button v-if="authStore.isAuthenticated" class="btn btn--danger btn--sm" @click="emit('delete', contact.id)" title="Excluir">
         ✕
       </button>
     </div>

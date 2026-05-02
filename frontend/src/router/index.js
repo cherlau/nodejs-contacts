@@ -8,7 +8,7 @@ const routes = [
   { path: '/', component: ContactsView },
   { path: '/login', component: LoginView },
   { path: '/contacts/new', component: ContactFormView, meta: { requiresAuth: true } },
-  { path: '/contacts/:id', component: ContactDetailView, meta: { requiresAuth: true } },
+  { path: '/contacts/:id', component: ContactDetailView },
   { path: '/contacts/:id/edit', component: ContactFormView, meta: { requiresAuth: true } },
 ]
 

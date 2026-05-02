@@ -4,6 +4,14 @@ Web application to manage contacts, built with Node.js and Vue.js.
 
 **Live:** https://cherlaufilho-nodejs.recruitment.alfasoft.pt
 
+## Login site
+
+```
+Username: admin
+Password: admin
+```
+
+
 ---
 
 ## Tech Stack
@@ -151,12 +159,3 @@ Test coverage includes:
 - `POST /api/contacts` — returns 401 without token
 - `POST /api/contacts` — returns 400 with invalid name, contact, email, missing image
 - `PUT /api/contacts/:id` — returns 400 with invalid fields, 404 for unknown id
-
----
-
-## Login Credentials (for evaluation)
-
-```
-Username: admin
-Password: admin
-```
